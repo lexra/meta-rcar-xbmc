@@ -1,0 +1,57 @@
+diff --git a/xbmc/windowing/wayland/EGLContext.cpp b/xbmc/windowing/wayland/EGLContext.cpp
+index f904a7bd189..807ade3e160 100644
+--- a/xbmc/windowing/wayland/EGLContext.cpp
++++ b/xbmc/windowing/wayland/EGLContext.cpp
+@@ -25,20 +25,18 @@
+ 
+ using namespace KODI::WINDOWING::WAYLAND;
+ 
++static int EGL_EXT_platform = 1;
++
+ CEGLContext::CEGLContext()
+ {
+   // EGL_EXT_platform_wayland requires EGL_EXT_client_extensions, so this should
+   // be safe to use
+   m_clientExtensions = CEGLUtils::GetClientExtensions();
+ 
+-  if (m_clientExtensions.find("EGL_EXT_platform_base") == m_clientExtensions.end())
+-  {
+-    throw std::runtime_error("EGL implementation does not support EGL_EXT_platform_base, cannot continue");
+-  }
+-  if (m_clientExtensions.find("EGL_EXT_platform_wayland") == m_clientExtensions.end())
+-  {
+-    throw std::runtime_error("EGL implementation does not support EGL_EXT_platform_wayland, cannot continue");
+-  }
++  if (m_clientExtensions.find("EGL_EXT_platform_base") == m_clientExtensions.end() || m_clientExtensions.find("EGL_EXT_platform_wayland") == m_clientExtensions.end()) {
++    EGL_EXT_platform = 0;
++    return;
++  } 
+ 
+   // Theoretically it is possible to use eglGetDisplay() and eglCreateWindowSurface,
+   // but then the EGL library basically has to guess which platform we want
+@@ -75,7 +73,10 @@ bool CEGLContext::CreateDisplay(wayland::display_t& display,
+     EGL_NONE,
+   };
+ 
+-  m_eglDisplay = m_eglGetPlatformDisplayEXT(EGL_PLATFORM_WAYLAND_EXT, display, nullptr);
++  if (EGL_EXT_platform)
++    m_eglDisplay = m_eglGetPlatformDisplayEXT(EGL_PLATFORM_WAYLAND_EXT, display, nullptr);
++  else
++    m_eglDisplay = eglGetDisplay(display);
+ 
+   if (m_eglDisplay == EGL_NO_DISPLAY)
+   {
+@@ -144,9 +145,10 @@ bool CEGLContext::CreateSurface(wayland::surface_t const& surface, CSizeInt size
+ 
+   m_nativeWindow = wayland::egl_window_t(surface, size.Width(), size.Height());
+ 
+-  m_eglSurface = m_eglCreatePlatformWindowSurfaceEXT(m_eglDisplay,
+-                                                     m_eglConfig,
+-                                                     m_nativeWindow, nullptr);
++  if (EGL_EXT_platform)
++    m_eglSurface = m_eglCreatePlatformWindowSurfaceEXT(m_eglDisplay, m_eglConfig, m_nativeWindow, nullptr);
++  else
++    m_eglSurface = eglCreateWindowSurface(m_eglDisplay, m_eglConfig, m_nativeWindow, nullptr);
+ 
+   if (m_eglSurface == EGL_NO_SURFACE)
+   {
