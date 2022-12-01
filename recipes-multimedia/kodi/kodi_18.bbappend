@@ -10,8 +10,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS += " \
 	ffmpeg \
-	omx-user-module \
-	gles-user-module \
+	virtual/libgles2 \
+	virtual/egl \
 	waylandpp \
 	waylandpp-native \
 	wayland \
