@@ -27,7 +27,7 @@ PACKAGECONFIG = " \
 "
 
 OECMAKE_GENERATOR = "Unix Makefiles"
-PARALLEL_MAKE = "-j 1"
+PARALLEL_MAKE = ""
 
 CFLAGS += " \
 	-Wno-maybe-uninitialized \
@@ -36,9 +36,6 @@ CFLAGS += " \
 	-Wno-attributes \
 	-Wno-deprecated-declarations \
 "
-
-#-DKODI_DEPENDSBUILD=1 
-
 
 EXTRA_OECMAKE = " \
 	-DNATIVEPREFIX=${STAGING_DIR_NATIVE}/usr \
@@ -80,5 +77,5 @@ addtask patches before do_configure after do_patch
 
 SYSTEMD_AUTO_ENABLE = "disable"
 
-#INSANE_SKIP_${PN}_append = " already-stripped "
-#INSANE_SKIP_${PN}-dev_append = " already-stripped "
+INSANE_SKIP_${PN}_append = " already-stripped"
+INSANE_SKIP_${PN}-dev_append = " already-stripped"
