@@ -1,1 +1,1 @@
-# XBMC for R-Car/Boards/Yocto-Gen3/v5.9.0
+# XBMC (Leia) for R-Car/Boards/Yocto-Gen3/v5.9.0
