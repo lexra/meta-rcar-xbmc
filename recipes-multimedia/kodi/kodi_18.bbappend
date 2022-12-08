@@ -19,6 +19,8 @@ DEPENDS += " \
 	wayland-protocols \
 "
 
+RDEPENDS_${PN} += " ca-certificates "
+
 WINDOWSYSTEM = "wayland"
 PACKAGECONFIG = " \
 	${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)} \
