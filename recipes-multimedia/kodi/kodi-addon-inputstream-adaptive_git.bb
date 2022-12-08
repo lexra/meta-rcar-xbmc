@@ -1,19 +1,22 @@
 SUMMARY = "kodi inputstream addon for several manifest types"
 
-LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://src/main.cpp;beginline=1;endline=17;md5=5eac1e215251c8f88d799f80ed45d5c0"
+LICENSE = "GPL"
+LIC_FILES_CHKSUM = "file://LICENSE.GPL;beginline=1;md5=930e2a5f63425d8dd72dbd7391c43c46"
 
 inherit kodi-addon
 
 DEPENDS += "expat"
 
-SRCREV = "b28d3f047e8f8c7c6eec68717ae8a6feac2b2891"
+SRCREV = "07921252fce84b38b30f3c95c8bf72270c165c80"
 
 
-PV = "2.1.13+gitr${SRCPV}"
-SRC_URI = "git://github.com/peak3d/inputstream.adaptive.git;protocol=https \
+PV = "2.2.28+gitr${SRCPV}"
+SRC_URI = "git://github.com/peak3d/inputstream.adaptive.git;branch=Leia;protocol=https \
           "
 
 S = "${WORKDIR}/git"
+
+PARALLEL_MAKE = "-j 1"
+OECMAKE_GENERATOR = "Unix Makefiles"
 
 KODIADDONNAME = "inputstream.adaptive"
