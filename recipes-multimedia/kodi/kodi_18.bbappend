@@ -29,7 +29,7 @@ PACKAGECONFIG = " \
 "
 
 OECMAKE_GENERATOR = "Unix Makefiles"
-PARALLEL_MAKE = ""
+PARALLEL_MAKE = "-j 1"
 
 CFLAGS += " \
 	-Wno-maybe-uninitialized \
@@ -40,20 +40,16 @@ CFLAGS += " \
 "
 
 EXTRA_OECMAKE = " \
+	-DVERBOSE=ON \
 	-DNATIVEPREFIX=${STAGING_DIR_NATIVE}/usr \
 	-DJava_JAVA_EXECUTABLE=/usr/bin/java \
 	-DWITH_TEXTUREPACKER=${STAGING_BINDIR_NATIVE}/TexturePacker \
 	\
-	-DENABLE_LDGOLD=ON \
-	-DENABLE_STATIC_LIBS=FALSE \
-	\
 	-DFFMPEG_PATH=${STAGING_DIR_TARGET} \
 	-DENABLE_INTERNAL_FFMPEG=OFF \
-	-DENABLE_INTERNAL_CROSSGUID=OFF \
 	\
 	-DENABLE_DVDCSS=OFF \
 	-DENABLE_OPTICAL=OFF \
-	-DENABLE_DEBUGFISSION=OFF \
 	-DCMAKE_BUILD_TYPE=Release \
 "
 
@@ -75,7 +71,6 @@ do_patches () {
 }
 
 addtask patches before do_configure after do_patch
-
 
 SYSTEMD_AUTO_ENABLE = "disable"
 
