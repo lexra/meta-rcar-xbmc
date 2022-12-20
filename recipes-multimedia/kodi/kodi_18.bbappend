@@ -58,19 +58,12 @@ EXTRA_OECMAKE_append = " \
 	-DWAYLAND_PROTOCOLS_DIR=${STAGING_DIR_TARGET}/usr/share/wayland-protocols \
 "
 
-#do_compile () {
-#	make -C ${S}/../build
-#}
-
-do_patches () {
+do_configure_prepend () {
 	mkdir -p ${STAGING_DIR_TARGET}/${libdir}/pkgconfig
 	install ${WORKDIR}/wayland-scanner++.pc ${STAGING_DIR_TARGET}${libdir}/pkgconfig
-	#cd ${STAGING_DIR_NATIVE}/bin
-	#ln -sf ../usr/bin/JsonSchemaBuilder .
-	#cd -
 }
 
-addtask patches before do_configure after do_patch
+#addtask patches before do_configure after do_patch
 
 SYSTEMD_AUTO_ENABLE = "disable"
 
