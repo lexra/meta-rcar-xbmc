@@ -9,6 +9,7 @@ SRC_URI += " \
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS += " \
+	flatbuffers \
 	ffmpeg \
 	virtual/libgles2 \
 	virtual/egl \
