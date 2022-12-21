@@ -1,0 +1,13 @@
+diff --git a/xbmc/windowing/wayland/WinSystemWaylandEGLContext.cpp b/xbmc/windowing/wayland/WinSystemWaylandEGLContext.cpp
+index 7c5c301aec..b607931417 100644
+--- a/xbmc/windowing/wayland/WinSystemWaylandEGLContext.cpp
++++ b/xbmc/windowing/wayland/WinSystemWaylandEGLContext.cpp
+@@ -20,7 +20,7 @@ using namespace KODI::WINDOWING::WAYLAND;
+ using namespace KODI::WINDOWING::LINUX;
+ 
+ CWinSystemWaylandEGLContext::CWinSystemWaylandEGLContext()
+-  : CWinSystemEGL{EGL_PLATFORM_WAYLAND_EXT, "EGL_EXT_platform_wayland"}
++  : CWinSystemEGL{EGL_PLATFORM_WAYLAND_KHR, "EGL_KHR_platform_wayland"}
+ {}
+ 
+ bool CWinSystemWaylandEGLContext::InitWindowSystemEGL(EGLint renderableType, EGLint apiType)
