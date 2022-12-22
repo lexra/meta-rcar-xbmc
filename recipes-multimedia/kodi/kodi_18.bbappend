@@ -32,14 +32,6 @@ PACKAGECONFIG = " \
 OECMAKE_GENERATOR = "Unix Makefiles"
 PARALLEL_MAKE = "-j 1"
 
-CFLAGS += " \
-	-Wno-maybe-uninitialized \
-	-Wno-implicit-fallthr \
-	-Wno-implicit-function-declaration \
-	-Wno-attributes \
-	-Wno-deprecated-declarations \
-"
-
 EXTRA_OECMAKE = " \
 	-DVERBOSE=ON \
 	-DNATIVEPREFIX=${STAGING_DIR_NATIVE}/usr \
@@ -63,8 +55,6 @@ do_configure_prepend () {
 	mkdir -p ${STAGING_DIR_TARGET}/${libdir}/pkgconfig
 	install ${WORKDIR}/wayland-scanner++.pc ${STAGING_DIR_TARGET}${libdir}/pkgconfig
 }
-
-#addtask patches before do_configure after do_patch
 
 SYSTEMD_AUTO_ENABLE = "disable"
 
