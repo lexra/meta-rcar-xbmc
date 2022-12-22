@@ -1,0 +1,24 @@
+diff --git a/xbmc/profiles/dialogs/GUIDialogProfileSettings.h b/xbmc/profiles/dialogs/GUIDialogProfileSettings.h
+index 5aa631da6ed..a5421184134 100644
+--- a/xbmc/profiles/dialogs/GUIDialogProfileSettings.h
++++ b/xbmc/profiles/dialogs/GUIDialogProfileSettings.h
+@@ -20,6 +20,7 @@
+ 
+ #pragma once
+ 
++#include <cassert>
+ #include <string>
+ 
+ #include "profiles/Profile.h"
+diff --git a/xbmc/windowing/GraphicContext.h b/xbmc/windowing/GraphicContext.h
+index 1f0c036194d..ed72984a213 100644
+--- a/xbmc/windowing/GraphicContext.h
++++ b/xbmc/windowing/GraphicContext.h
+@@ -20,6 +20,7 @@
+ 
+ #pragma once
+ 
++#include <cassert>
+ #include <string>
+ #include <vector>
+ #include <stack>
